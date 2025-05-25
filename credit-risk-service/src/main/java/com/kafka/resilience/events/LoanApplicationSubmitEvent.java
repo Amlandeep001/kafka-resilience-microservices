@@ -1,18 +1,16 @@
 package com.kafka.resilience.events;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Value
 @Builder
+@Jacksonized
 public class LoanApplicationSubmitEvent
 {
-	private long loanId;
-	private int userId;
-	private double amount;
-	private String transactionId;
+	long loanId;
+	int userId;
+	double amount;
+	String transactionId;
 }

@@ -3,9 +3,12 @@ package com.kafka.resilience.util;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CreditScoreUtils
 {
-	public static Map<Integer, Integer> creditScoreResults()
+	public Map<Integer, Integer> creditScoreResults()
 	{
 		Map<Integer, Integer> creditScoreMap = new HashMap<>();
 		creditScoreMap.put(101, 760);

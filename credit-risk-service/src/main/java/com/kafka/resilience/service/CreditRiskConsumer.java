@@ -18,11 +18,14 @@ public class CreditRiskConsumer
 {
 	public final String creditRiskTopic;
 	private final KafkaTemplate<String, Object> kafkaTemplate;
+	private final CreditScoreUtils creditScoreUtils;
 
-	public CreditRiskConsumer(@Value("${credit.risk.topic-name}") String creditRiskTopic, KafkaTemplate<String, Object> kafkaTemplate)
+	public CreditRiskConsumer(@Value("${credit.risk.topic-name}") String creditRiskTopic, KafkaTemplate<String, Object> kafkaTemplate,
+			CreditScoreUtils creditScoreUtils)
 	{
 		this.creditRiskTopic = creditRiskTopic;
 		this.kafkaTemplate = kafkaTemplate;
+		this.creditScoreUtils = creditScoreUtils;
 	}
 
 	@KafkaListener(topics = "loan-process-topic")
@@ -63,7 +66,7 @@ public class CreditRiskConsumer
 
 	private void evaluateCreditRisk(int userId)
 	{
-		int creditScore = CreditScoreUtils
+		int creditScore = creditScoreUtils
 				.creditScoreResults()
 				.getOrDefault(userId, 0);
 		if(creditScore < 750)
